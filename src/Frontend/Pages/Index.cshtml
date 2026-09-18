@@ -1,0 +1,32 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Windows bug lab";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Windows ASP.NET Bug Lab</h1>
+    <p>Detected Windows OS: @Model.OperatingSystemCaption</p>
+</div>
+
+@if (Model.IsLoading)
+{
+    <p role="status">Loading products…</p>
+}
+else
+{
+    <table class="table">
+        <thead><tr><th>Id</th><th>Name</th><th>Price</th></tr></thead>
+        <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                @* Intentional FRONTEND-02: raw decimal output ignores user culture and currency. *@
+                <td>@product.Price</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
