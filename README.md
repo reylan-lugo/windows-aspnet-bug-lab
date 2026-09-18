@@ -11,6 +11,17 @@ The solution can be cross-compiled from a non-Windows machine, but both applicat
 
 For a Windows x64 artifact, publish with `dotnet publish -r win-x64`.
 
+## Windows containers
+
+Each service has its own Windows Server Core LTSC 2022 Dockerfile. Build from the repository root, so the Dockerfile can resolve the monorepo paths:
+
+```powershell
+docker build -f src/Api/Dockerfile -t windows-bug-lab-api .
+docker build -f src/Frontend/Dockerfile -t windows-bug-lab-frontend .
+```
+
+These images require a Windows container host. They are intentionally unsuitable for Linux-only Docker hosts.
+
 ## Tests
 
 `tests/Api.Tests` exercises only the healthy list/create flows. `tests/Frontend.Tests` covers product deserialization and includes a Windows-only WMI smoke test. The intentional defects are deliberately not covered, so the baseline suite remains green. Run the suite on Windows:
