@@ -10,7 +10,7 @@ COPY . .
 WORKDIR C:\src\src\Frontend
 RUN dotnet publish "Frontend.csproj" --configuration Release --output C:\app\publish --no-restore
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-windowsservercore-ltsc2022 AS final
+FROM mcr.microsoft.com/dotnet/sdk:8.0-windowsservercore-ltsc2022 AS final
 WORKDIR C:\app
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
